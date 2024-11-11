@@ -6,7 +6,7 @@ export const Productos = ({ alt, src }) => {
   return (
     <div>
       <img
-        className='rounded-md sm:p-10 sm:rounded-2xl'
+        className='rounded-md sm:p-3 sm:rounded-2xl'
         src={`${src}`}
         alt={alt}
         onError={e => {

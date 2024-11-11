@@ -18,10 +18,8 @@ import { getData, putData } from '../../../config/utils/metodoFecht';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { SearchIcon } from '../../../states/icons/SearchIcon';
-import { ChevronDownIcon } from '../../../states/icons/ChevronDownIcon';
-import { EditarCategoria } from './EditarCategoria';
-import { CrearCategoria } from './CrearCategoria';
-import { DetalleCategoria } from './DetalleCategoria';
+
+import { DetalleUsuarios } from './DetalleUsuario';
 
 const capitalize = str => {
   if (typeof str !== 'string' || !str) return '';
@@ -31,10 +29,8 @@ const capitalize = str => {
 const RUTA_API = import.meta.env.VITE_API_URL;
 
 const columns = [
-  { name: 'Nombre Categoria', uid: 'nombre', sortable: true },
+  { name: 'Nombre Usuarios', uid: 'nombre', sortable: true },
   { name: 'Descripción', uid: 'descripcion', sortable: true },
-  { name: 'estado', uid: 'estado' },
-
   { name: 'Acciones', uid: 'actions' },
 ];
 
@@ -50,9 +46,9 @@ const statusColorMap = {
 
 const INITIAL_VISIBLE_COLUMNS = ['nombre', 'descripcion', 'estado', 'actions'];
 
-export const TablaCategoria = () => {
+export const TablaUsuarios = () => {
   const [loading, setLoading] = useState(true);
-  const [categorias, setcategorias] = useState([]);
+  const [Usuarios, setUsuarios] = useState([]);
   const [filterValue, setFilterValue] = useState('');
   const [selectedKeys, setSelectedKeys] = useState(new Set([]));
   const [visibleColumns, setVisibleColumns] = useState(
@@ -73,15 +69,15 @@ export const TablaCategoria = () => {
     const loadData = async () => {
       try {
         const { status, dataResponse } = await getData(
-          `${RUTA_API}/api/categorias`,
+          `${RUTA_API}/api/Usuarios`,
         );
         if (status >= 200 && status < 300) {
-          setcategorias(dataResponse);
+          setUsuarios(dataResponse);
         } else {
           toast.error('No se encontraron los recursos (404)');
         }
       } catch (err) {
-        toast.error('No se ha podido traer los Categorias');
+        toast.error('No se ha podido traer los Usuarios');
         console.error(err);
       } finally {
         setLoading(false);
@@ -94,7 +90,7 @@ export const TablaCategoria = () => {
   const handleChipClick = async id => {
     Swal.fire({
       title: '¿Estás seguro?',
-      text: 'Vas a cambiar el estado de un categoria',
+      text: 'Vas a cambiar el estado de un Usuarios',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, seguro',
@@ -104,12 +100,12 @@ export const TablaCategoria = () => {
       if (result.isConfirmed) {
         try {
           const { status, dataResponse } = await putData(
-            `${RUTA_API}/api/categorias/estado/${id}`,
+            `${RUTA_API}/api/Usuarios/estado/${id}`,
           );
           if (status >= 200 && status < 300) {
             toast.success('Estado cambiado');
-            // Actualizar los categorias después del cambio de estado
-            refreshcategorias();
+            // Actualizar los Usuarios después del cambio de estado
+            refreshUsuarios();
           } else if (status >= 400 && status < 500) {
             toast.warn(dataResponse.mensaje);
           }
@@ -121,18 +117,18 @@ export const TablaCategoria = () => {
     });
   };
 
-  const refreshcategorias = async () => {
+  const refreshUsuarios = async () => {
     try {
       const { status, dataResponse } = await getData(
-        `${RUTA_API}/api/categorias`,
+        `${RUTA_API}/api/Usuarios`,
       );
       if (status >= 200 && status < 300) {
-        setcategorias(dataResponse);
+        setUsuarios(dataResponse);
       } else {
         toast.error('No se encontraron los recursos (404)');
       }
     } catch (err) {
-      toast.error('No se ha podido traer los categorias');
+      toast.error('No se ha podido traer los Usuarios');
       console.error(err);
     }
   };
@@ -145,7 +141,7 @@ export const TablaCategoria = () => {
   }, [visibleColumns]);
 
   const filteredItems = useMemo(() => {
-    let filteredProducts = [...categorias];
+    let filteredProducts = [...Usuarios];
 
     if (hasSearchFilter) {
       filteredProducts = filteredProducts.filter(product =>
@@ -163,7 +159,7 @@ export const TablaCategoria = () => {
     }
 
     return filteredProducts;
-  }, [categorias, filterValue, statusFilter]);
+  }, [Usuarios, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -200,9 +196,9 @@ export const TablaCategoria = () => {
           if (Array.isArray(cellValue)) {
             return (
               <div className='flex flex-col'>
-                {cellValue.map((categoria, index) => (
+                {cellValue.map((Usuarios, index) => (
                   <p key={index} className='text-bold text-small capitalize'>
-                    {capitalize(categoria)}
+                    {capitalize(Usuarios)}
                   </p>
                 ))}
               </div>
@@ -231,8 +227,8 @@ export const TablaCategoria = () => {
         case 'actions':
           return (
             <div className='relative flex items-center gap-2'>
-              <DetalleCategoria id={item._id} />
-              <EditarCategoria id={item._id} />
+              <DetalleUsuarios id={item._id} />
+              <EditarUsuarios id={item._id} />
             </div>
           );
         default:
@@ -287,11 +283,11 @@ export const TablaCategoria = () => {
             onValueChange={onSearchChange}
           />
 
-          <CrearCategoria></CrearCategoria>
+         
         </div>
         <div className='flex justify-between items-center'>
           <span className='text-default-400 text-small'>
-            Total {categorias.length} categorias
+            Total {Usuarios.length} Usuarios
           </span>
           <label className='flex items-center text-default-400 text-small'>
             Filas por página:
@@ -312,7 +308,7 @@ export const TablaCategoria = () => {
     statusFilter,
     visibleColumns,
     onRowsPerPageChange,
-    categorias.length,
+    Usuarios.length,
     onSearchChange,
     hasSearchFilter,
   ]);
@@ -384,7 +380,7 @@ export const TablaCategoria = () => {
         )}
       </TableHeader>
       <TableBody
-        emptyContent={'No se encontraron categorias'}
+        emptyContent={'No se encontraron Usuarios'}
         items={sortedItems}
       >
         {item => (

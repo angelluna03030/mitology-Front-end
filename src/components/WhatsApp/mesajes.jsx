@@ -44,7 +44,7 @@ export const IconWhastApp = () => {
             className="w-10 h-10 rounded-full mr-4" // Imagen redondeada
           />
           <span className="text-white font-semibold text-lg">
-            Enviar un Mensaje a DELUXE
+            Enviar un Mensaje a MITOLOGY
           </span>
         </div>
 
@@ -60,7 +60,7 @@ export const IconWhastApp = () => {
             <div className="flex-grow overflow-y-auto space-y-2">
               {/* Aquí aparecerían los mensajes */}
               <div className="bg-[#DCF8C6] text-gray-800 p-2 rounded-lg max-w-[75%] self-end mt-24">
-                Contáctanos. Servicio al cliente. Deluxe Uniformes. ¡Hola! 👋🏼 ¿En qué te puedo ayudar?
+                Contáctanos. Servicio al cliente. MITOLOGY. ¡Hola! 👋🏼 ¿En qué te puedo ayudar?
               </div>
             </div>
             {/* Input de mensaje */}

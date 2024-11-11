@@ -8,7 +8,7 @@ import { Descripcion } from '../../components/Descripcion';
 import { Comprar } from '../../components/Boton';
 import { GaleriaProductos } from '../../components/GaleriaProducto';
 import { Color } from '../../components/Color';
-import { CarritoComprasIcono } from '../CarritoComprar/IconoCarritoCompras';
+import { CarritoComprasIcono } from '../CarritoComprar/FormularioDeUsuario';
 import { toast } from 'react-toastify';
 import { getData } from '../../config/utils/metodoFecht';
 import { CargarProductos } from '../../components/CardCargando/CargarProductos/CargarProductos';
@@ -31,7 +31,18 @@ export const Producto = () => {
   const { agregarProducto } = useContext(CarritoContext);
   const [validar, setValidar] = useState(true);
   const [mensajeTooltip, setMensajeTooltip] = useState('');
+const detalleProducto = {
+  nombreproductos: "camsiaseta",
+  imagenes: [
+     "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206",
+     "https://mitology.com.co/cdn/shop/files/CAMISAS.jpg?v=1729613140&width=750"
+  ],
+  precio: 40000,
+  tallas: ["XL", "XX"],
+  colores: ["#000000", "#701717FF", "#190606FF", "#31C857FF", "#b1b1b1"],
 
+
+}
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
@@ -123,34 +134,33 @@ export const Producto = () => {
   return (
     <>
       <Layout />
-      <Buscador />
       {isDesktopOrLaptop && (
-        <Escritorio producto={producto} setProducto={setProducto} />
+        <Escritorio producto={detalleProducto} setProducto={setProducto} />
       )}
       {isMobile && (
         <>
-          {producto && (
+          {detalleProducto && (
             <>
               <GaleriaProductos
-                imagenes={producto.imagenes.map(img => ({
+                imagenes={detalleProducto.imagenes.map(img => ({
                   src: `${img}`,
                   alt: `Imagen de producto ${img}`,
                 }))}
               />
               <div style={{ display: 'flex' }} className='ml-6'>
                 <Titulo
-                  titulo={producto.nombreproductos}
-                  precio={producto.precio}
+                  titulo={detalleProducto.nombreproductos}
+                  precio={detalleProducto.precio}
                 />
               </div>
               <br />
-              <Descripcion descripcion={producto.descripcion} />
+              <Descripcion descripcion={detalleProducto.descripcion} />
               <br />
               <p className='text-lg ml-4'>Tallas</p>
               <br />
               <div className='space-y-4'>
                 <div className='grid grid-cols-6 gap-4'>
-                  {producto.tallas.map(size => (
+                  {detalleProducto.tallas.map(size => (
                     <div key={size} className='flex items-center space-x-2'>
                       <input
                         className='day-btn m-9'
@@ -172,7 +182,7 @@ export const Producto = () => {
                   <p className='text-lg ml-4'>Colores</p>
                 </div>
                 <div className='grid grid-cols-6 gap-4 ml-2'>
-                  {producto.colores.map(color => (
+                  {detalleProducto.colores.map(color => (
                     <Color
                       key={color}
                       color={color}
@@ -211,9 +221,9 @@ export const Producto = () => {
                 </div>
                 <Comprar
                   color={selectedTalla}
-                  nombre={producto.nombreproductos}
-                  precio={producto.precio}
-                  producto={producto}
+                  nombre={detalleProducto.nombreproductos}
+                  precio={detalleProducto.precio}
+                  producto={detalleProducto}
                   selectedColor={selectedColor}
                   selectedTalla={selectedTalla}
                 />

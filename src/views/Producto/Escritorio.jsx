@@ -6,7 +6,7 @@ import { Descripcion } from '../../components/Descripcion';
 import { Comprar } from '../../components/Boton';
 import { GaleriaProductos } from '../../components/GaleriaProducto';
 import { Color } from '../../components/Color';
-import { CarritoComprasIcono } from '../CarritoComprar/IconoCarritoCompras';
+import { CarritoComprasIcono } from '../CarritoComprar/FormularioDeUsuario';
 import { toast } from 'react-toastify';
 import { getData } from '../../config/utils/metodoFecht';
 import { CargarProductosEscritorio } from '../../components/CardCargando/CargarProductos/CargarProductoEscritorio';

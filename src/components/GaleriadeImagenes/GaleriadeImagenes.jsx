@@ -7,10 +7,28 @@ import imagen_No_funtion from '../../assets/no-fotos.png';
 import { Skeleton } from '@nextui-org/react';
 
 export const GaleriaImagenes = ({ imagenes = [] }) => {
-  if (!imagenes || imagenes.length === 0) {
+  const Imagenes = [
+    {
+      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
+    },
+    {
+      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
+    },
+    {
+      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
+    },
+    {
+      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
+    },
+    {
+      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
+    }
+  ];
+
+  if (!Imagenes || Imagenes.length === 0) {
     return (
       <div className='flex justify-center items-center'>
-        <div className='overflow-hidden rounded-lg shadow-md relative h-96 w-80 mx-auto mt-10'>
+        <div className='overflow-hidden rounded-lg shadow-md relative h-96 w-80 mx-auto sm:mt-0 mt-10'>
           <Skeleton className='rounded-lg  sm:m-5  h-96 w-80 m-auto mb-10' />;
         </div>
       </div>
@@ -40,18 +58,18 @@ export const GaleriaImagenes = ({ imagenes = [] }) => {
         }}
         className=''
       >
-        {imagenes.map((imagen, index) => (
+        {Imagenes.map((imagen, index) => (
           <SwiperSlide
             key={index}
             className='flex items-center md:ml-2 mb-10 md:mb-16 h-full'
           >
             <Productos
-              src={imagen}
+              src={imagen.imagen}
               alt={imagen}
               onError={e => {
                 e.target.src = imagen_No_funtion;
               }}
-              className='rounded-lg'
+              className=''
             />
           </SwiperSlide>
         ))}

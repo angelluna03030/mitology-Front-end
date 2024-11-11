@@ -9,7 +9,7 @@ import { TablaCarrito } from '../views/CarritoComprar/TablaCarritoCompras';
 import { Categorias } from '../views/Categorias.modulo';
 import { RegistrarCatalogo } from '../views/Catalogo.module';
 import PrivateRoute from './RutasPrivadas';
-
+import {Usuarios} from "../views/Usuarios.module"
 export const Rutas = () => {
   return (
     <Routes>
@@ -42,6 +42,14 @@ export const Rutas = () => {
         element={
           <PrivateRoute>
             <RegistrarCatalogo />
+          </PrivateRoute>
+        }
+      />
+       <Route
+        path='/Usuarios'
+        element={
+          <PrivateRoute>
+            <Usuarios />
           </PrivateRoute>
         }
       />

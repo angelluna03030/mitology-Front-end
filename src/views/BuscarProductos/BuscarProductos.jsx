@@ -2,7 +2,7 @@ import { Layout } from '../../components/Layout';
 import { Buscador } from '../../components/Inputs';
 import { Footer } from '../../components/Footer';
 import { CardCategoria } from '../../components/Card';
-import { CarritoComprasIcono } from '../CarritoComprar/IconoCarritoCompras';
+import { CarritoComprasIcono } from '../CarritoComprar/FormularioDeUsuario';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Skeleton } from '@nextui-org/react';

@@ -1,5 +1,5 @@
 import { Layout } from '../../components/Layout';
-import { Buscador } from '../../components/Inputs';
+
 import { GaleriaImagenes } from '../../components/GaleriadeImagenes';
 import React, { useEffect, useState } from 'react';
 import { Carrusel } from '../../components/CaruselImagenes';
@@ -7,10 +7,11 @@ import { VideoPlayer } from '../../components/Video';
 import { Producto } from '../../components/Producto';
 import { Footer } from '../../components/Footer';
 import { Categorias } from '../../components/Categorias';
-import { CarritoComprasIcono } from '../CarritoComprar/IconoCarritoCompras';
+import { CarritoComprasIcono } from '../CarritoComprar/FormularioDeUsuario';
 import { toast } from 'react-toastify';
 import { getData } from '../../config/utils/metodoFecht';
-import {IconWhastApp} from "../../components/WhatsApp"
+import { IconWhastApp } from "../../components/WhatsApp"
+import { Descripcion } from '../../components/Descripcion/Descripcion';
 const RUTA_API = import.meta.env.VITE_API_URL;
 export const Catalogo = () => {
   const [catalogo, setCatalogo] = useState({
@@ -50,18 +51,19 @@ export const Catalogo = () => {
   return (
     <>
       <Layout />
-      <Buscador />
       <Carrusel imagenes={catalogo.imagenesparavideo} />
-      <Categorias />
-      <div className='w-80 h-64 sm:w-96 justify-center items-center mb-64 ml-12  m-auto sm:m-auto sm:mb-52 '>
-        <VideoPlayer video={catalogo.video} />
-      </div>
       <div className='sm:m-auto sm:pt-56 sm:px-10 sm:mr-16 '>
         <GaleriaImagenes imagenes={catalogo.imagenesparagaleria} />
       </div>
-
+      <p className='sm:ml-16 ml-4  text-3xl text-gray-400 font-semibold'>
+        productos que pueden interesarte:
+      </p>
       <Producto Ids={catalogo.productosdestacados} />
-      <CarritoComprasIcono />
+      <Descripcion
+        descripcion="La tendencia oversize fusiona estilo y comodidad en siluetas amplias que permiten una expresión auténtica. Con MITOLOGY, cada diseño rinde homenaje a mitologías del pasado, uniendo historia y moda. Redefine tu estilo"
+        imagen="https://mitology.com.co/cdn/shop/files/CAMISAS.jpg?v=1729613140&width=750"
+        titulo="OVERSIZE"
+      />
       <IconWhastApp></IconWhastApp>
       <Footer />
     </>

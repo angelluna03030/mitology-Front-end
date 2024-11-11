@@ -39,7 +39,7 @@ export const Navegacion = () => {
             to={'/'}
             className='text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline'
           >
-            DELUXE
+            MITOLOGY
           </Link>
           <button
             className='rounded-lg md:hidden focus:outline-none focus:shadow-outline'
@@ -76,6 +76,12 @@ export const Navegacion = () => {
             to={'/registrarcategoria'}
           >
             Categoria
+          </Link>
+          <Link
+            className='block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline'
+            to={'/Usuarios'}
+          >
+            Usuarios
           </Link>
           <Link
             className='block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline'
