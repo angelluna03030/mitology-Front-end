@@ -16,13 +16,13 @@ export const Footer = () => {
               Inspirada en el pasado, creada para el presente ⚡
             </h5>
             <div className="mt-6 lg:mb-0 mb-6 flex">
-              <button className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" type="button">
+              <Link to={"https://www.instagram.com/mitology_col/profilecard/?igsh=MWFhcHNvZmtld3JtMw=="} className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" type="button">
                 <Image className="m-auto" src={instragram} width={30} />
-              </button>
+              </Link>
 
-              <button className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" type="button">
+              <Link to={"https://www.facebook.com/share/1CbPGN4snL/?mibextid=LQQJ4d"} className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" type="button">
                 <Image className="m-auto" src={facebook} width={30} />
-              </button>
+              </Link>
 
               <button className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" type="button">
                 <Image className="m-auto" src={tiktik} width={30} />

@@ -280,7 +280,7 @@ export const TablaCategoria = () => {
           <Input
             isClearable
             className='w-[200px] sm:max-w-full sm:w-[400px]'
-            placeholder='Buscar Usuarios...'
+            placeholder='Buscar Categoria...'
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={onClear}
@@ -357,7 +357,7 @@ export const TablaCategoria = () => {
 
   return (
     <Table
-      className='sm:w-[1200px] w-[400px]'
+   className='sm:w-[1000px] w-[400px]'
       aria-label='Example table with custom cells, pagination and sorting'
       isHeaderSticky
       bottomContent={bottomContent}

@@ -4,6 +4,7 @@ import { Departamentos } from "./informacion";
 import { CarritoComprasIcono } from "./Data";
 import { NumeroDocumento, validarApellidos, validarCorreo, validarNombre, validartelefono } from "./Validaciones";
 
+
 export const FormularioUsuario = () => {
   const [formData, setFormData] = useState({
     correo: "",

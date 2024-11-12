@@ -1,77 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  useDisclosure,
-  Tooltip,
-  Input,
-  Textarea,
-  Image,
-  CircularProgress,
-} from '@nextui-org/react';
+import React, { useState, useEffect } from 'react';
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, Textarea, Tooltip, CircularProgress } from '@nextui-org/react';
 import { EyeIcon } from '../../../states/icons/EyeIcon';
-import { getData } from '../../../config/utils/metodoFecht';
-const RUTA_API = import.meta.env.VITE_API_URL;
 
-export const DetalleUsuarios = ({ id }) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [categoria, setCategoria] = useState(null);
-  const [nombre, setNombre] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [imagenActual, setImagenActual] = useState('');
-  const [nuevaImagen, setNuevaImagen] = useState(null);
-  const [FechaCreacion, setFechaCreacion] = useState('');
-  const [loading, setLoading] = useState(false); // Estado para la carga
 
+export const DetalleUsuarios = ({ item }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [usuario, setUsuario] = useState(null);
+
+  // Abrir o cerrar el modal
+  const onOpen = () => setIsOpen(true);
+  const onClose = () => setIsOpen(false);
+
+  // Fetch de los datos del usuario
   useEffect(() => {
-    if (isOpen) {
-      const loadData = async () => {
-        setLoading(true); // Inicia el indicador de carga
-        try {
-          const { status, dataResponse } = await getData(
-            `${RUTA_API}/api/categorias/${id}`,
-          );
-          
-          if (status >= 200 && status < 300) {
-            // Suponiendo que la respuesta es un objeto
-            setCategoria(dataResponse);
-            setNombre(dataResponse.nombre || '');
-            setDescripcion(dataResponse.descripcion || '');
-            setImagenActual(dataResponse.imagen || '');
-            console.log(dataResponse.imagen)
-            setFechaCreacion(dataResponse.fechaCreacion || '');
-          } else {
-            toast.error('Error al cargar la categoría');
-            console.error('Error al cargar la categoría:', status);
-          }
-        } catch (error) {
-          toast.error('Error al cargar la categoría');
-          console.error('Error cargando la categoría:', error);
-        } finally {
-          setLoading(false); // Finaliza el indicador de carga
-        }
-      };
-
-      loadData();
+    if (item) {
+      setLoading(true);
+      // Simulamos una carga de datos, puedes cambiar esto por tu llamada API
+      setTimeout(() => {
+        setUsuario(item);  // Asigna la información del usuario recibido
+        setLoading(false);
+      }, 500);
     }
-  }, [isOpen, id]); // Se ejecuta cuando `isOpen` o `id` cambian
+  }, [item]);
 
-  const handleFileChange = event => {
-    const file = event.target.files[0];
-    if (file) {
-      setNuevaImagen(file);
-    }
-  };
+  if (!usuario) return null; // Si no hay datos de usuario, no renderizamos nada
+
+  const { nombres, apellidos, numeroDeDocumento, tipoDeDocumento, correo, numeroDeCelular, direccion, barrio, ciudad, departamento } = usuario;
 
   return (
     <>
-      <Tooltip content='Detalles'>
+      <Tooltip content="Detalles">
         <span
-          className='text-lg text-default-400 cursor-pointer active:opacity-50'
+          className="text-lg text-default-400 cursor-pointer active:opacity-50"
           onClick={onOpen}
         >
           <EyeIcon />
@@ -79,10 +40,10 @@ export const DetalleUsuarios = ({ id }) => {
       </Tooltip>
 
       <Modal
-        backdrop='blur'
+        backdrop="blur"
         isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        size='lg'
+        onOpenChange={() => setIsOpen(!isOpen)}
+        size="lg"
         motionProps={{
           variants: {
             enter: {
@@ -105,66 +66,117 @@ export const DetalleUsuarios = ({ id }) => {
         }}
       >
         <ModalContent>
-          {onClose => (
-            <>
-              <ModalHeader>
-                <h3>Detalle Categoría</h3>
-              </ModalHeader>
-              <ModalBody>
-                {loading ? (
-                  <div className='flex justify-center items-center h-40'>
-                    <CircularProgress />
-                  </div>
-                ) : (
-                  <>
-                    <label className='block text-sm font-medium text-gray-700'>
-                      Imagen Actual
-                    </label>
-                    <div className='relative mt-2 m-auto'>
-                      <Image
-                        src={`${imagenActual}`}
-                        alt='Imagen Actual'
-                        width={200}
-                        height={200}
-                        className='object-cover rounded-md'
-                      />
-                    </div>
+          <ModalHeader>
+            <h3>Detalle Usuario</h3>
+          </ModalHeader>
+          <ModalBody>
+            {loading ? (
+              <div className="flex justify-center items-center h-40">
+                <CircularProgress />
+              </div>
+            ) : (
+              <>
+              <div className='flex'>
 
-                    <Input
-                      disabled
-                      className='w-full'
-                      fullWidth
-                      clearable
-                      label='Nombre'
-                      value={nombre}
-                    />
+                <Input
+                  isDisabled
+                  className="w-full"
+                  fullWidth
+                  clearable
+                  label="Nombres"
+                  value={nombres}
+                />
+                <Input
+                  isDisabled
+                  className="w-full"
+                  fullWidth
+                  clearable
+                  label="Apellidos"
+                  value={apellidos}
+                />
+              </div>
+              <div className='flex'>
 
-                    <Textarea
-                      disabled
-                      fullWidth
-                      label='Descripción'
-                      value={descripcion}
-                      rows={4}
-                      className='w-full'
-                    />
-                    <Input
-                      disabled
-                      className='w-full'
-                      fullWidth
-                      clearable
-                      label='Fecha Creacion'
-                      value={new Date(FechaCreacion).toLocaleDateString()}
-                    />
-                  </>
-                )}
-              </ModalBody>
-              <ModalFooter className='mr-72 sm:mr-0 sm:mt-5'>
-                <Button auto flat color='error' onClick={onClose}>
-                  Cancelar
-                </Button>
-              </ModalFooter>
-            </>
-          )}
+                <Input
+                  isDisabled
+                  className="w-full"
+                  fullWidth
+                  clearable
+                  label="Número de Documento"
+                  value={numeroDeDocumento}
+                />
+                <Input
+                  isDisabled
+                  className="w-full"
+                  fullWidth
+                  clearable
+                  label="Tipo de Documento"
+                  value={tipoDeDocumento}
+                />
+              </div>
+              <div className='flex'>
+
+                <Input
+                  isDisabled
+                  className="w-full"
+                  fullWidth
+                  clearable
+                  label="Correo"
+                  value={correo}
+                />
+                <Input
+                  isDisabled
+                  className="w-full"
+                  fullWidth
+                  clearable
+                  label="Número de Celular"
+                  value={numeroDeCelular}
+                />
+              </div>
+              <div className='flex'>
+
+
+                <Input
+                  isDisabled
+                  fullWidth
+                  label="Dirección"
+                  value={direccion}
+                  rows={2}
+                  className="w-full"
+                />
+                <Input
+                  isDisabled
+                  className="w-full"
+                  fullWidth
+                  clearable
+                  label="Barrio"
+                  value={barrio}
+                />
+              </div>
+                <Input
+                  isDisabled
+                  className="w-full"
+                  fullWidth
+                  clearable
+                  label="Ciudad"
+                  value={ciudad}
+                />
+                <Input
+                  isDisabled
+                  className="w-full"
+                  fullWidth
+                  clearable
+                  label="Departamento"
+                  value={departamento}
+                />
+              </>
+            )}
+          </ModalBody>
+          <ModalFooter className="mr-72 sm:mr-0 sm:mt-5">
+            <Button auto flat color="error" onClick={onClose}>
+              Cancelar
+            </Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

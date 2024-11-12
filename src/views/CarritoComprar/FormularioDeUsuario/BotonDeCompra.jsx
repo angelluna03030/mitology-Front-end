@@ -3,7 +3,7 @@ import { Button } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 import { postData } from "../../../config/utils/metodoFecht";
 import { toast } from 'react-toastify';
-
+const RUTA_API = import.meta.env.VITE_API_URL;
 export const CarritoComprasIcono = ({ formData }) => {
   const buttonRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,7 +42,7 @@ export const CarritoComprasIcono = ({ formData }) => {
  
       // Usa postData para enviar los datos
       const { status, dataResponse } = await postData(
-        "http://localhost:3000/api/usuarios",
+        `${RUTA_API}/api/usuarios`,
         preparedData
       );
       if (status === 201) {

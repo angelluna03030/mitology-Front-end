@@ -8,18 +8,13 @@ import {
   TableCell,
   Input,
   Button,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
   Pagination,
 } from '@nextui-org/react';
-import { getData, putData } from '../../../config/utils/metodoFecht';
+import { getData } from '../../../config/utils/metodoFecht';
 import { toast } from 'react-toastify';
-import Swal from 'sweetalert2';
 import { SearchIcon } from '../../../states/icons/SearchIcon';
-
 import { DetalleUsuarios } from './DetalleUsuario';
+import { CrearExcel } from './CrearExcel';
 
 const capitalize = str => {
   if (typeof str !== 'string' || !str) return '';
@@ -29,38 +24,23 @@ const capitalize = str => {
 const RUTA_API = import.meta.env.VITE_API_URL;
 
 const columns = [
-  { name: 'Nombre Usuarios', uid: 'nombre', sortable: true },
-  { name: 'Descripción', uid: 'descripcion', sortable: true },
-  { name: 'Acciones', uid: 'actions' },
+  { name: 'Nombres', uid: 'nombres', sortable: true },
+  { name: 'Apellidos', uid: 'apellidos', sortable: true },
+  { name: 'Numero De Documento', uid: 'numeroDeDocumento', sortable: true },
+  { name: 'Acciones', uid: 'Acciones' },
 ];
 
-const EstadoOptions = [
-  { name: 'activo', uid: '1' },
-  { name: 'inactivo', uid: '0' },
-];
-
-const statusColorMap = {
-  1: 'success',
-  0: 'danger',
-};
-
-const INITIAL_VISIBLE_COLUMNS = ['nombre', 'descripcion', 'estado', 'actions'];
+const INITIAL_VISIBLE_COLUMNS = ['nombres', 'apellidos', 'numeroDeDocumento', 'Acciones'];
 
 export const TablaUsuarios = () => {
   const [loading, setLoading] = useState(true);
-  const [Usuarios, setUsuarios] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
   const [filterValue, setFilterValue] = useState('');
   const [selectedKeys, setSelectedKeys] = useState(new Set([]));
-  const [visibleColumns, setVisibleColumns] = useState(
-    new Set(INITIAL_VISIBLE_COLUMNS),
-  );
-  const [statusFilter, setStatusFilter] = useState('all');
+  const [visibleColumns, setVisibleColumns] = useState(new Set(INITIAL_VISIBLE_COLUMNS));
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [sortDescriptor, setSortDescriptor] = useState({
-    column: 'nombre',
-    direction: 'ascending',
-  });
   const [page, setPage] = useState(1);
+  const [sortDescriptor, setSortDescriptor] = useState({ column: 'nombres', direction: 'ascending' });
 
   const hasSearchFilter = Boolean(filterValue);
 
@@ -68,9 +48,7 @@ export const TablaUsuarios = () => {
     setLoading(true);
     const loadData = async () => {
       try {
-        const { status, dataResponse } = await getData(
-          `${RUTA_API}/api/Usuarios`,
-        );
+        const { status, dataResponse } = await getData(`${RUTA_API}/api/usuarios`);
         if (status >= 200 && status < 300) {
           setUsuarios(dataResponse);
         } else {
@@ -83,83 +61,29 @@ export const TablaUsuarios = () => {
         setLoading(false);
       }
     };
-
     loadData();
   }, []);
 
-  const handleChipClick = async id => {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Vas a cambiar el estado de un Usuarios',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, seguro',
-      cancelButtonText: 'No, cancelar',
-      reverseButtons: true,
-    }).then(async result => {
-      if (result.isConfirmed) {
-        try {
-          const { status, dataResponse } = await putData(
-            `${RUTA_API}/api/Usuarios/estado/${id}`,
-          );
-          if (status >= 200 && status < 300) {
-            toast.success('Estado cambiado');
-            // Actualizar los Usuarios después del cambio de estado
-            refreshUsuarios();
-          } else if (status >= 400 && status < 500) {
-            toast.warn(dataResponse.mensaje);
-          }
-        } catch (err) {
-          toast.error('Hubo un error al cambiar el estado');
-          console.error(err);
-        }
-      }
-    });
-  };
-
-  const refreshUsuarios = async () => {
-    try {
-      const { status, dataResponse } = await getData(
-        `${RUTA_API}/api/Usuarios`,
-      );
-      if (status >= 200 && status < 300) {
-        setUsuarios(dataResponse);
-      } else {
-        toast.error('No se encontraron los recursos (404)');
-      }
-    } catch (err) {
-      toast.error('No se ha podido traer los Usuarios');
-      console.error(err);
-    }
-  };
-
   const headerColumns = useMemo(() => {
     if (visibleColumns === 'all') return columns;
-    return columns.filter(column =>
-      Array.from(visibleColumns).includes(column.uid),
-    );
+    return columns.filter(column => Array.from(visibleColumns).includes(column.uid));
   }, [visibleColumns]);
 
   const filteredItems = useMemo(() => {
-    let filteredProducts = [...Usuarios];
+    let filteredUsuarios = [...usuarios];
 
     if (hasSearchFilter) {
-      filteredProducts = filteredProducts.filter(product =>
-        product.nombre.toLowerCase().includes(filterValue.toLowerCase()),
+      filteredUsuarios = filteredUsuarios.filter(usuario =>
+        usuario.nombres.toLowerCase().includes(filterValue.toLowerCase()) ||
+        usuario.apellidos.toLowerCase().includes(filterValue.toLowerCase()) 
+     
+  
+
       );
     }
 
-    if (
-      statusFilter !== 'all' &&
-      Array.from(statusFilter).length !== EstadoOptions.length
-    ) {
-      filteredProducts = filteredProducts.filter(product =>
-        Array.from(statusFilter).includes(product.estado.toString()),
-      );
-    }
-
-    return filteredProducts;
-  }, [Usuarios, filterValue, statusFilter]);
+    return filteredUsuarios;
+  }, [usuarios, filterValue]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -177,66 +101,27 @@ export const TablaUsuarios = () => {
       return sortDescriptor.direction === 'descending' ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
-  const renderCell = useCallback(
-    (item, columnKey) => {
-      const cellValue = item[columnKey];
 
-      switch (columnKey) {
-        case 'nombre':
-          return (
-            <div className='flex flex-col'>
-              <p className='text-bold text-small capitalize'>
-                {capitalize(cellValue)}
-              </p>
-            </div>
-          );
+  const renderCell = useCallback((item, columnKey) => {
+    const cellValue = item[columnKey];
 
-        case 'descripcion':
-          // Verificar si cellValue es un array antes de usar map
-          if (Array.isArray(cellValue)) {
-            return (
-              <div className='flex flex-col'>
-                {cellValue.map((Usuarios, index) => (
-                  <p key={index} className='text-bold text-small capitalize'>
-                    {capitalize(Usuarios)}
-                  </p>
-                ))}
-              </div>
-            );
-          } else {
-            return (
-              <div className='flex flex-col'>
-                <p className='text-bold text-small capitalize'>
-                  {capitalize(cellValue)}
-                </p>
-              </div>
-            );
-          }
-        case 'estado':
-          return (
-            <Button
-              className='capitalize'
-              color={statusColorMap[item.estado]}
-              size='sm'
-              variant='flat'
-              onClick={() => handleChipClick(item._id)}
-            >
-              {item.estado === 1 ? 'Activo' : 'Inactivo'}
-            </Button>
-          );
-        case 'actions':
-          return (
-            <div className='relative flex items-center gap-2'>
-              <DetalleUsuarios id={item._id} />
-              <EditarUsuarios id={item._id} />
-            </div>
-          );
-        default:
-          return cellValue;
-      }
-    },
-    [handleChipClick],
-  );
+    switch (columnKey) {
+      case 'nombres':
+        return <div className='text-bold text-small capitalize'>{capitalize(cellValue)}</div>;
+      case 'apellidos':
+        return <div className='text-bold text-small capitalize'>{capitalize(cellValue)}</div>;
+      case 'numeroDeDocumento':
+        return <div className='text-bold text-small'>{cellValue}</div>;
+      case 'Acciones':
+        return (
+          <div className='relative flex items-center gap-2'>
+            <DetalleUsuarios item={item} />
+          </div>
+        );
+      default:
+        return cellValue;
+    }
+  }, []);
 
   const onNextPage = useCallback(() => {
     if (page < pages) {
@@ -271,7 +156,7 @@ export const TablaUsuarios = () => {
 
   const topContent = useMemo(() => {
     return (
-      <div className='sm:flex sm:flex-col sm:gap-4 ml-10 mr-10'>
+      <div className='sm:flex sm:flex-col  ml-10 mr-10'>
         <div className='flex justify-between gap-3 items-end'>
           <Input
             isClearable
@@ -281,13 +166,11 @@ export const TablaUsuarios = () => {
             value={filterValue}
             onClear={onClear}
             onValueChange={onSearchChange}
-          />
-
-         
+          /> <CrearExcel></CrearExcel>
         </div>
         <div className='flex justify-between items-center'>
           <span className='text-default-400 text-small'>
-            Total {Usuarios.length} Usuarios
+            Total {usuarios.length} usuarios
           </span>
           <label className='flex items-center text-default-400 text-small'>
             Filas por página:
@@ -303,15 +186,8 @@ export const TablaUsuarios = () => {
         </div>
       </div>
     );
-  }, [
-    filterValue,
-    statusFilter,
-    visibleColumns,
-    onRowsPerPageChange,
-    Usuarios.length,
-    onSearchChange,
-    hasSearchFilter,
-  ]);
+  }, [filterValue, usuarios.length, onSearchChange]);
+
   const bottomContent = React.useMemo(() => {
     return (
       <div className='py-2 px-2 flex justify-between items-center'>
@@ -336,7 +212,7 @@ export const TablaUsuarios = () => {
             variant='flat'
             onPress={onPreviousPage}
           >
-            Anterios
+            Anterior
           </Button>
           <Button
             isDisabled={pages === 1}
@@ -344,27 +220,20 @@ export const TablaUsuarios = () => {
             variant='flat'
             onPress={onNextPage}
           >
-            Siguente
+            Siguiente
           </Button>
         </div>
       </div>
     );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+  }, [selectedKeys, page, pages]);
 
   return (
     <Table
-      className='sm:w-[1200px] w-[400px]'
-      aria-label='Example table with custom cells, pagination and sorting'
+    className='sm:w-[1000px] w-[400px] mx-3'
+      aria-label='Usuarios'
       isHeaderSticky
       bottomContent={bottomContent}
-      bottomContentPlacement='outside'
-      classNames={{
-        wrapper: 'max-h-[382px]',
-      }}
-      selectedKeys={selectedKeys}
-      sortDescriptor={sortDescriptor}
       topContent={topContent}
-      topContentPlacement='outside'
       onSelectionChange={setSelectedKeys}
       onSortChange={setSortDescriptor}
     >
@@ -372,17 +241,13 @@ export const TablaUsuarios = () => {
         {column => (
           <TableColumn
             key={column.uid}
-            align={column.uid === 'actions' ? 'center' : 'start'}
             allowsSorting={column.sortable}
           >
             {column.name}
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody
-        emptyContent={'No se encontraron Usuarios'}
-        items={sortedItems}
-      >
+      <TableBody emptyContent={'No se encontraron usuarios'} items={sortedItems}>
         {item => (
           <TableRow key={item._id}>
             {columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}

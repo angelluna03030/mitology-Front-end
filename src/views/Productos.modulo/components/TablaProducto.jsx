@@ -379,7 +379,7 @@ export const TablaProductos = () => {
 
   return (
     <Table
-      className='sm:w-[1200px] w-[400px]'
+      className='sm:w-[1000px] w-[400px]'
       aria-label='Example table with custom cells, pagination and sorting'
       isHeaderSticky
       bottomContent={bottomContent}

@@ -54,7 +54,7 @@ export const Sesion = () => {
     <div className='flex justify-center items-center min-h-screen'>
       <div className='w-96 relative p-4 rounded-md text-black bg-colorprimary m-auto mt-36 md:max-w-3xl md:mt-34 lg:mt-24 xl:mt-24 2xl:mr-2 2xl:ml-2 2xl:mt-24 justify-center'>
         <div className='text-xl md:text-2xl font-bold mb-2 text-[#1e0e4b] text-center'>
-          Bienvenida <span className='text-[#7747ff]'>Marisol</span>
+          Bienvenido <span className='text-[#7747ff]'>Danny</span>
         </div>
         <div className='text-xs md:text-sm font-normal mb-4 text-center text-[#1e0e4b]'>
           Inicia sesión en tu cuenta
