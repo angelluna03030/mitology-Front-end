@@ -1,4 +1,4 @@
-import { Tooltip, Button } from '@nextui-org/react';
+import { Tooltip, Button, ButtonGroup } from '@nextui-org/react';
 import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
 import { Colores } from '../../views/Productos.modulo/components/DataColores';
@@ -79,14 +79,14 @@ export const Comprar = ({
           // arrow color
           'before:bg-neutral-400 dark:before:bg-white',
         ],
-        content: ['py-2 px-4 shadow-xl bg-[#358FED]', 'text-white'],
+        content: ['py-2 px-4 shadow-xl bg-[#000000FF]', 'text-white'],
       }}
     >
-      <div className='bg-colorprimary rounded-full m-3 p-4 text-white w-40 justify-items-center text-center'>
+      <div className=' rounded-full mt-1 p-4 text-white  justify-items-center text-center'>
         <button
           type='button'
           onClick={handleComprarProducto}
-          className='  sm:mt-0'
+          className=' font-semibold     w-56   h-16   text-xl text bg-black '
         >
           Comprar
         </button>

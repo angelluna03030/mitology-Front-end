@@ -7,7 +7,7 @@ import { VideoPlayer } from '../../components/Video';
 import { Producto } from '../../components/Producto';
 import { Footer } from '../../components/Footer';
 import { Categorias } from '../../components/Categorias';
-import { CarritoComprasIcono } from '../CarritoComprar/FormularioDeUsuario';
+import { CarritoComprasIcono } from '../CarritoComprar/FormularioDeUsuario/Data';
 import { toast } from 'react-toastify';
 import { getData } from '../../config/utils/metodoFecht';
 import { IconWhastApp } from "../../components/WhatsApp"

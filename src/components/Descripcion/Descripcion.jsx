@@ -1,5 +1,6 @@
 import { Image } from "@nextui-org/react";
 import { Link } from "react-router-dom";
+import { Link as ScrollLink } from 'react-scroll';
 export const Descripcion = ({ descripcion, imagen, titulo }) => {
   return (
     <div className="flex flex-col md:flex-row m-auto p-4 sm:mx-28">
@@ -12,12 +13,15 @@ export const Descripcion = ({ descripcion, imagen, titulo }) => {
         <p className="mt-4 text-left text-xl leading-relaxed text-[#868686] h-52 w-auto ">
           &bull; {descripcion}
         </p>
-        <Link
-          to="/"
-          className="h-12 w-28 my-5 sm:my-0 flex items-center justify-center rounded-lg bg-[#b1b1b1] text-center border border-[#868686] hover:border-2 hover:border-[#676767] hover:shadow-lg"
+        <ScrollLink
+          
+          to="principio"
+          smooth={true}
+          duration={500}
+          className="h-12 w-28 my-5 sm:my-0 flex items-center justify-center rounded-lg bg-[#b1b1b1] text-center border border-[#868686] hover:border-2 hover:border-[#676767] hover:shadow-lg cursor-pointer"
         >
           VER MÁS
-        </Link>
+        </ScrollLink>
       </div>
     </div>
   );

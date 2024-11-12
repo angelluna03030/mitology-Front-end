@@ -28,6 +28,7 @@
     "react-flip-page": "^1.6.4",
     "react-responsive": "^10.0.0",
     "react-router-dom": "^6.23.1",
+    "react-scroll": "^1.9.0",
     "react-toastify": "^10.0.5",
     "rollup": "^4.21.2",
     "serve": "^14.2.3",
