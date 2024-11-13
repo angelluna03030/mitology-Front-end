@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { Buscador } from '../../components/Inputs';
 
 import { Titulo } from '../../components/Titulo';
 import {  DescripcionProducto } from '../../components/Descripcion';
@@ -16,11 +17,12 @@ import { Tooltip, Button, ButtonGroup } from '@nextui-org/react';
 import { IconWhastApp } from "../../components/WhatsApp"
 import { Layout } from '../../components/Layout';
 import { Footer } from '../../components/Footer';
+import { GuiadeTalla } from '../../components/GuiadeTalla/Guiadetalla';
 
 const RUTA_API = import.meta.env.VITE_API_URL;
-export const Producto = ({ producto, setProducto }) => {
+export const Producto = ({ }) => {
   const { id } = useParams();
-
+  const [ producto, setProducto] =  useState();
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedTalla, setSelectedTalla] = useState(null);
   const [selectedImagen, setSelectedImagen] = useState(null); // Estado para la imagen seleccionada
@@ -33,40 +35,30 @@ export const Producto = ({ producto, setProducto }) => {
 
 
   };
-  const detaleproducto ={
-    nombreproductos: "camisiatea",
-    imagenes: [
-"https://mitology.com.co/cdn/shop/files/CAMISAS.jpg?v=1729613140&width=750",
-"https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
-    ],
-    tallas:["XL", "L"],
-    colores: ["#000000", "#132059FF", "#7B0909FF", "#B50404FF", "#9E0000FF"],
-    precio: "40000",
-    categoria :"Camisas"
-  }
-  // useEffect(() => {
-  //   const loadData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const { status, dataResponse } = await getData(
-  //         `${RUTA_API}/api/productos/${id}`,
-  //       );
-  //       if (status >= 200 && status < 300) {
-  //         setProducto(dataResponse);
-  //         setSelectedImagen(dataResponse.imagenes[0]); // Selecciona la primera imagen
-  //       } else {
-  //         toast.error('No se encontraron los recursos (404)');
-  //       }
-  //     } catch (err) {
-  //       toast.error('No se ha podido traer el producto');
-  //       console.error(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
 
-  //   loadData();
-  // }, [id]);
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const { status, dataResponse } = await getData(
+          `${RUTA_API}/api/productos/${id}`,
+        );
+        if (status >= 200 && status < 300) {
+          setProducto(dataResponse);
+          setSelectedImagen(dataResponse.imagenes[0]); // Selecciona la primera imagen
+        } else {
+          toast.error('No se encontraron los recursos (404)');
+        }
+      } catch (err) {
+        toast.error('No se ha podido traer el producto');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [id]);
 
   const handleAgregarProducto = () => {
     if (validar) {
@@ -117,7 +109,7 @@ export const Producto = ({ producto, setProducto }) => {
     }
   }, [selectedColor, selectedTalla, producto]);
 
-  if (!loading) {
+  if (loading) {
     return (
       <>
         <CargarProductosEscritorio />
@@ -128,12 +120,16 @@ export const Producto = ({ producto, setProducto }) => {
   return (
     <>
     <Layout></Layout>
-      {detaleproducto && (
+    <div className='bg-black w-full'>
+      
+      <Buscador></Buscador>
+            </div> 
+      {producto && (
      <div className={`flex flex-col lg:flex-row mt-10 `}>
      {/* Parte izquierda: Galería de productos, ocupando toda la anchura en móvil */}
      <div className={`w-full lg:w-1/2`}>
        <GaleriaProductos
-         imagenes={detaleproducto.imagenes.map(img => ({
+         imagenes={producto.imagenes.map(img => ({
            src: `${img}`,
            alt: `Imagen de producto ${img}`,
          }))}
@@ -142,14 +138,14 @@ export const Producto = ({ producto, setProducto }) => {
    
      {/* Parte derecha: Información del producto */}
      <div className={`w-full lg:w-1/3 lg:ml-20 mt-4 lg:mt-2`}>
-       <Titulo titulo={detaleproducto.nombreproductos} />
+       <Titulo titulo={producto.nombreproductos} />
    
        <div className={`text-xl font-semibold text-left mr-8 my-3 text-[#b1b1b1]`}>
-         {detaleproducto.categoria}
+         {producto.categoria}
        </div>
    
        <div className={`text-2xl font-semibold text-left mr-8`}>
-         ${formatearPrecio(detaleproducto.precio)},00
+         ${formatearPrecio(producto.precio)},00
        </div>
    
        <hr className="my-6 border-blueGray-300" />
@@ -157,7 +153,7 @@ export const Producto = ({ producto, setProducto }) => {
        <div>
          <p className="text-lg">Colores</p>
          <div className="grid grid-cols-8 mx-2 sm:mx-0 md:grid-cols-8 gap-4 my-3">
-           {detaleproducto.colores.map(color => (
+           {producto.colores.map(color => (
              <Color
                key={color}
                color={color}
@@ -171,7 +167,7 @@ export const Producto = ({ producto, setProducto }) => {
        <p className="text-lg">Tallas</p>
        <div className="space-y-4">
          <div className="grid grid-cols-6 mx-2 sm:mx-0 md:grid-cols-6 gap-4">
-           {detaleproducto.tallas.map(size => (
+           {producto.tallas.map(size => (
              <div key={size} className="flex items-center space-x-2 my-3">
                <input
                  className="day-btn"
@@ -187,8 +183,9 @@ export const Producto = ({ producto, setProducto }) => {
            ))}
          </div>
        </div>
+           <GuiadeTalla></GuiadeTalla>
    
-       <br />
+
    
        <div className="flex flex-col lg:flex-row">
          <div className="border-sky-950 rounded-full m-1 p-4">
@@ -215,27 +212,28 @@ export const Producto = ({ producto, setProducto }) => {
            </Tooltip>
          </div>
          </div>
-       
+      
          <Comprar
            color={selectedTalla}
-           nombre={detaleproducto.nombreproductos}
-           precio={detaleproducto.precio}
-           producto={detaleproducto}
+           nombre={producto.nombreproductos}
+           precio={producto.precio}
+           producto={producto}
            selectedColor={selectedColor}
            selectedTalla={selectedTalla}
          />
    
          <IconWhastApp />
        </div>
-   
-       <DescripcionProducto descripcion={detaleproducto.descripcion} />
+       <DescripcionProducto descripcion={producto.descripcion} />
      </div>
      
    </div>
    
       )}
    
-      <CategoriasProductos></CategoriasProductos>
+      <CategoriasProductos
+      categoria={producto.categorias[0]}
+      ></CategoriasProductos>
     
       <Footer></Footer>
     </>

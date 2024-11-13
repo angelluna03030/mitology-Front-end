@@ -7,25 +7,9 @@ import imagen_No_funtion from '../../assets/no-fotos.png';
 import { Skeleton } from '@nextui-org/react';
 
 export const GaleriaImagenes = ({ imagenes = [] }) => {
-  const Imagenes = [
-    {
-      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
-    },
-    {
-      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
-    },
-    {
-      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
-    },
-    {
-      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
-    },
-    {
-      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
-    }
-  ];
+ 
 
-  if (!Imagenes || Imagenes.length === 0) {
+  if (!imagenes || imagenes.length === 0) {
     return (
       <div className='flex justify-center items-center'>
         <div className='overflow-hidden rounded-lg shadow-md relative h-96 w-80 mx-auto sm:mt-0 mt-10'>
@@ -58,13 +42,13 @@ export const GaleriaImagenes = ({ imagenes = [] }) => {
         }}
         className=''
       >
-        {Imagenes.map((imagen, index) => (
+        {imagenes.map((imagen, index) => (
           <SwiperSlide
             key={index}
             className='flex items-center md:ml-2 mb-10 md:mb-16 h-full'
           >
             <Productos
-              src={imagen.imagen}
+              src={imagen}
               alt={imagen}
               onError={e => {
                 e.target.src = imagen_No_funtion;

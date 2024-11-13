@@ -4,3 +4,4 @@ export * from './EditarImagenesParaVideo';
 export * from './EditarGaleriadeImagenes';
 export * from './EditarVideo';
 export * from './EditarProductosDestacados';
+export * from './Editardescripcion';

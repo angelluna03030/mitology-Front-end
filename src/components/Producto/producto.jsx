@@ -8,37 +8,7 @@ const RUTA_API = import.meta.env.VITE_API_URL;
 export const Producto = ({ Ids }) => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true); // Estado de carga
-  const producto = [
-    {
-      _id: 1,
-      imagenes: ["https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206", "https://mitology.com.co/cdn/shop/files/CAMISAS.jpg?v=1729613140&width=750"],
-      nombreproductos: "Oversize JANUS DOS CARAS",
-      descripcion: "80.000"
-
-    },
-    {
-      _id: 1,
-      imagenes: ["https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206", "https://mitology.com.co/cdn/shop/files/CAMISAS.jpg?v=1729613140&width=750"],
-      nombreproductos: "Oversize JANUS DOS CARAS",
-      descripcion: "80.000"
-
-    },
-    {
-      _id: 1,
-      imagenes: ["https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206", "https://mitology.com.co/cdn/shop/files/CAMISAS.jpg?v=1729613140&width=750"],
-      nombreproductos: "Oversize JANUS DOS CARAS",
-      descripcion: "80.000"
-
-    },
-    {
-      _id: 1,
-      imagenes: ["https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206", "https://mitology.com.co/cdn/shop/files/CAMISAS.jpg?v=1729613140&width=750"],
-      nombreproductos: "Oversize JANUS DOS CARAS",
-      descripcion: "80.000"
-
-    },
-
-  ]
+ 
   useEffect(() => {
     const obtenerCatalogo = async () => {
       setLoading(true); // Comienza la carga
@@ -96,7 +66,7 @@ export const Producto = ({ Ids }) => {
   return (
     <div className='container mx-auto p-4 lg:min-h-screen flex items-center justify-center'>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
-        {producto.map(producto => (
+        {productos.map(producto => (
           <Link to={`/producto/${producto._id}`} key={producto._id}>
             <div className='w-56 sm:w-56 mx-4 relative shadow-sm hover:shadow-md rounded-lg cursor-pointer h-80 hover:underline sm:mx-8 transition-shadow duration-400'>
               <img

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TablaVaciaImagen = () => (
+export const TablaVaciaImagen = ({ busqueda}) => (
   <div
     style={{
       textAlign: 'center',
@@ -12,6 +12,6 @@ export const TablaVaciaImagen = () => (
     }}
   >
 
-    <p>No hay nada por ahora</p>
+    <p className=''>No hay nada por ahora de <span className='font-bold '>{busqueda}</span> </p>
   </div>
 );

@@ -143,7 +143,7 @@ export const EditarImagenesParaVideo = () => {
 
   return (
     <>
-      <Button onPress={onOpen}>Imagenes Para Video</Button>
+      <Button onPress={onOpen}>Imagenes Para Galeria</Button>
       <Modal
         size='5xl'
         backdrop='opaque'
@@ -158,7 +158,7 @@ export const EditarImagenesParaVideo = () => {
           {onClose => (
             <>
               <ModalHeader className='flex flex-col gap-1'>
-                Editar Imagenes para el primer video{' '}
+                Editar Imagenes para la galeria{' '}
                 <p className='text-red-700'> (Solo 10 Imagenes)</p>
               </ModalHeader>
               <ModalBody>

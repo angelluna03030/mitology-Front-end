@@ -8,19 +8,8 @@ export const Carrusel = ({ imagenes = [] }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const Imagenes = [
-    {
-      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
-    },
-    {
-      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
-    },
-    {
-      imagen: "https://mitology.com.co/cdn/shop/files/Virtualthreads_-_2024-10-19T115734.951.png?v=1729542413&width=1206"
-    }
-  ];
 
-  const totalImages = Imagenes.length;
+  const totalImages = imagenes.length;
 
   useEffect(() => {
     const timeoutId = setTimeout(() => setImagesLoaded(true), 1000);
@@ -74,7 +63,7 @@ export const Carrusel = ({ imagenes = [] }) => {
 
       {/* Contenedor de Imágenes */}
       <div className="flex" style={containerStyle}>
-        {Imagenes.map((imagen, index) => (
+        {imagenes.map((imagen, index) => (
           <div
             key={index}
             className="w-full flex-shrink-0"
@@ -84,7 +73,7 @@ export const Carrusel = ({ imagenes = [] }) => {
               onError={(e) => {
                 e.target.src = imagen_No_funtion;
               }}
-              src={imagen.imagen}
+              src={imagen}
               alt={`Imagen ${index + 1}`}
               className="w-full h-full object-cover"
             />

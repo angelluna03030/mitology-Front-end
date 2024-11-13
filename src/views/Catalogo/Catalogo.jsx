@@ -60,12 +60,16 @@ export const Catalogo = () => {
       </p>
       <Producto Ids={catalogo.productosdestacados} />
       <Descripcion
-        descripcion="La tendencia oversize fusiona estilo y comodidad en siluetas amplias que permiten una expresión auténtica. Con MITOLOGY, cada diseño rinde homenaje a mitologías del pasado, uniendo historia y moda. Redefine tu estilo"
-        imagen="https://mitology.com.co/cdn/shop/files/CAMISAS.jpg?v=1729613140&width=750"
-        titulo="OVERSIZE"
+        descripcion={catalogo.descripcion}
+        imagen={catalogo.imagendescripcion}
+        titulo={catalogo.titulodescripcion}
       />
       <IconWhastApp></IconWhastApp>
       <Footer />
+      {/**
+       * "La tendencia oversize fusiona estilo y comodidad en siluetas amplias que permiten una expresión auténtica. Con MITOLOGY, cada diseño rinde homenaje a mitologías del pasado, uniendo historia y moda. Redefine tu estilo"
+       * 
+       */}
     </>
   );
 };
