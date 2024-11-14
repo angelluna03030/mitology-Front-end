@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export const Layout = () => {
   return (
-    <nav className='w-screen bg-[#000000] h-fit overflow-hidden' id='principio'>
+    <nav className='w-screen bg-[#000000] h-fit overflow-hidden' id='princi'>
       <div className='py-2   h-10  text-white flex items-end justify-end  w-full'>
         <div className=' overflow-hidden whitespace-nowrap  w-full '>
           <Link to={'/'}>

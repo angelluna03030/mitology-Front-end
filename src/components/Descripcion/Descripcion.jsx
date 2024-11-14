@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Link as ScrollLink } from 'react-scroll';
 export const Descripcion = ({ descripcion, imagen, titulo }) => {
   return (
-    <div className="flex flex-col md:flex-row m-auto p-4 sm:mx-28">
+    <div className="flex flex-col md:flex-row m-auto p-4 sm:mx-28 mb-6">
       <Image
         src={imagen}
         className="w-full  h-full rounded-lg md:rounded-none md:rounded-l-lg"

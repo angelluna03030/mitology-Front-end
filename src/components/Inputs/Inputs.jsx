@@ -1,11 +1,11 @@
 import { SearchIcon } from './SearchIcon';
-import { AutocompleteItem, Autocomplete } from '@nextui-org/react';
+import { AutocompleteItem, Autocomplete, Image } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { CarritoContext } from "../../states/context/ContextCarrito";
 import { getData } from '../../config/utils/metodoFecht';
-
+import logo from "../../assets/icon.png";
 const RUTA_API = import.meta.env.VITE_API_URL;
 
 export const Buscador = () => {
@@ -72,8 +72,13 @@ export const Buscador = () => {
 
   return (
     <>
-      <div className="cursor-pointer mb-4 text-white font-semibold flex bg-transparent items-center justify-center sm:text-xl  text-xs">
-       
+      <div className="cursor-pointer mb-4 text-white font-semibold flex bg-transparent items-center justify-center sm:text-xl  text-xs h-auto">
+        <div
+        className='flex items-center justify-center'
+        >
+
+      <Image src={logo} width={50} height={60} className="rounded-none sm:h-10 sm:w-20 md:h-20 lg:h-5 xl:h-5 sm:mr-96 mr-4" alt="Logo" />
+        </div>
         <Link
           to={"/"}
           className="sm:mx-8  mx-2  relative text-white after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full after:transition-all after:duration-300"
@@ -81,7 +86,7 @@ export const Buscador = () => {
           INICIO
         </Link>
         <Link
-          to={"/productos/buscar/camisetas"}
+          to={"/productos/todos"}
           className="sm:mx-8 mx-2 relative text-white after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full after:transition-all after:duration-300"
         >
           CAMISETAS

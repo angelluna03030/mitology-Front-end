@@ -99,7 +99,7 @@ export const CategoriasProductos = ({categoria}) => {
                   {category.nombreproductos}
                 </h1>
                 <p className='mt-1 sm:mt-2 text-[#000000] items-center justify-center text-center underline-offset-0'>
-                  {  `${formatearPrecio(category.precio)}, `+"00 COP" || 'No hay Precio Disponible.'}
+                  {  `${formatearPrecio(category.precio)},`+"00 COP" || 'No hay Precio Disponible.'}
                 </p>
               </div>
             </div>

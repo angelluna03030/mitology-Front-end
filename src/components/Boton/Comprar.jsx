@@ -2,6 +2,9 @@ import { Tooltip, Button, ButtonGroup } from '@nextui-org/react';
 import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
 import { Colores } from '../../views/Productos.modulo/components/DataColores';
+import React, { useContext } from 'react';
+import { CarritoContext } from '../../states/context/ContextCarrito';
+import { useNavigate } from 'react-router-dom';
 export const Comprar = ({
   nombre,
   precio,
@@ -11,39 +14,39 @@ export const Comprar = ({
 }) => {
   const [validar, setValidar] = useState(true);
   const [mensajeTooltip, setMensajeTooltip] = useState('');
-
+  const { agregarProducto } = useContext(CarritoContext);
+  const navigate = useNavigate();
   const obtenerNombreColor = colorHex => {
     const colorEncontrado = Colores.find(c => c.color === colorHex);
     return colorEncontrado ? colorEncontrado.label : colorHex;
   };
+
   const handleComprarProducto = () => {
     if (validar && nombre && precio && selectedColor && selectedTalla) {
-      console.log(nombre, precio, producto, selectedColor, selectedTalla);
-      enviarMensaje(); // Llama a la función para enviar el mensaje
+      handleAgregarProducto(); // Llama a la función para agregar el producto al carrito
     } else {
       toast.error(mensajeTooltip); // Muestra el mensaje del tooltip como un error si la validación falla
     }
   };
 
-  const generarMensaje = () => {
-    let mensaje =
-      'Quiero hacer este pedido en Deluxe Uniformes: ========================\n';
-
-    mensaje += `- 1 *${nombre}* - Talla: ${selectedTalla}, Color: ${obtenerNombreColor(selectedColor)}, / _$ ${precio.toLocaleString()}_\n`;
-
-    mensaje += `========================\nTOTAL: *$ ${precio.toLocaleString()}*\n========================\n`;
-
-    return mensaje;
-  };
-  const enviarMensaje = () => {
-    const numero = '3017996301';
-    const mensaje = encodeURIComponent(generarMensaje());
-    const urlWhatsApp = `https://wa.me/57${numero}?text=${mensaje}`;
-
-    console.log(urlWhatsApp); // Agrega esto para verificar la URL generada
-
-    // Abrir WhatsApp en una nueva pestaña
-    window.open(urlWhatsApp, '_blank');
+  const handleAgregarProducto = () => {
+    if (validar) {
+      agregarProducto(
+        {
+          id: producto._id,
+          imagen: producto.imagenes[0], // Utiliza la primera imagen del producto
+          nombre: producto.nombreproductos,
+          precio: producto.precio,
+          talla: selectedTalla,
+          color: selectedColor,
+        },
+        1 // Cantidad seleccionada
+      );
+      toast.success('Listo para la compra');
+      navigate(`/carritocompras`);
+    } else {
+      toast.error(mensajeTooltip);
+    }
   };
 
   useEffect(() => {
@@ -82,11 +85,11 @@ export const Comprar = ({
         content: ['py-2 px-4 shadow-xl bg-[#000000FF]', 'text-white'],
       }}
     >
-      <div className=' rounded-full mt-1 p-4 text-white  justify-items-center text-center'>
+      <div className='rounded-full mt-1 p-4 text-white justify-items-center text-center  cursor-pointer '>
         <button
           type='button'
           onClick={handleComprarProducto}
-          className=' font-semibold     w-56   h-16   text-xl text bg-black '
+          className='font-semibold w-56 h-16 text-xl bg-black'
         >
           Comprar
         </button>

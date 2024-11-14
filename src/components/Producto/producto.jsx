@@ -8,7 +8,11 @@ const RUTA_API = import.meta.env.VITE_API_URL;
 export const Producto = ({ Ids }) => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true); // Estado de carga
- 
+  const formatearPrecio = (precio) => {
+    return precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+
+
+  };
   useEffect(() => {
     const obtenerCatalogo = async () => {
       setLoading(true); // Comienza la carga
@@ -98,7 +102,7 @@ export const Producto = ({ Ids }) => {
                   {producto.nombreproductos}
                 </h1>
                 <p className='mt-1 sm:mt-2 text-[#B9B9B9] items-center justify-center text-center underline-offset-0'>
-                  {producto.descripcion + ",00 COP" || 'No hay Precio Disponible.'}
+                  {`${formatearPrecio(producto.precio)}` + ",00 COP"|| 'No hay Precio Disponible.'}
                 </p>
               </div>
             </div>
