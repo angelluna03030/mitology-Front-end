@@ -61,7 +61,7 @@ export const Comprar = ({ nombre, precio, producto, selectedColor, selectedTalla
   return (
     <>
       <Tooltip isDisabled={validar} content={mensajeTooltip} showArrow placement='top-start'>
-        <div onClick={handleComprarProducto}  className=' mt-1 p-4 text-white text-center cursor-pointer' >
+        <div onClick={handleComprarProducto}  className=' mt-1 p-4 cursor-pointer text-white text-center cursor-pointer' >
           <button type='button'  className='font-semibold cursor-pointer w-56 h-16 text-xl bg-black '>
             Comprar
           </button>
