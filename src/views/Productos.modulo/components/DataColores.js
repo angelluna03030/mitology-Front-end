@@ -27,8 +27,8 @@ const Colores = [
     label: 'Bebe',
   },
   {
-    color: '#006994',
-    label: 'Oceano',
+    color: '#F3E5AB',
+    label: 'Vainilla',
   },
   {
     color: '#C1E0BF',

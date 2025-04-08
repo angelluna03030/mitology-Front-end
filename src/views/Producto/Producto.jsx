@@ -127,7 +127,7 @@ export const Producto = ({ }) => {
       {producto && (
      <div className={`flex flex-col lg:flex-row mt-10 `}>
      {/* Parte izquierda: Galería de productos, ocupando toda la anchura en móvil */}
-     <div className={`w-full lg:w-1/2`}>
+     <div className={`w-full lg:w-1/2 `}>
        <GaleriaProductos
          imagenes={producto.imagenes.map(img => ({
            src: `${img}`,

@@ -97,11 +97,11 @@ export const Producto = ({ Ids }) => {
                 alt={producto.nombreproductos}
                 className='w-full h-48 object-cover rounded-t-lg absolute top-0 left-0 transition-opacity duration-500 opacity-0 hover:opacity-100'
               />
-              <div className='h-20 sm:h-20 backdrop-blur text-white p-4 rounded-b-lg'>
-                <h1 className='text-lg sm:text-lg items-center justify-center text-center font-semibold text-[#787878]'>
+              <div className='h-20 sm:h-20 backdrop-blur text-black p-4 rounded-b-lg'>
+                <h1 className='text-lg sm:text-lg items-center justify-center text-center font-semibold text-[#000000]'>
                   {producto.nombreproductos}
                 </h1>
-                <p className='mt-1 sm:mt-2 text-[#B9B9B9] items-center justify-center text-center underline-offset-0'>
+                <p className='mt-1 sm:mt-2 text-[#000000] items-center justify-center text-center underline-offset-0'>
                   {`${formatearPrecio(producto.precio)}` + ",00 COP"|| 'No hay Precio Disponible.'}
                 </p>
               </div>

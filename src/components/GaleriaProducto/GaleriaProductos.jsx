@@ -22,7 +22,7 @@ export const GaleriaProductos = ({ imagenes = [] }) => {
     <div className="flex flex-col items-center">
       <div className="max-w-5xl">
         {/* Imagen activa */}
-        <div className="relative h-96 w-96 m-auto mb-8">
+        <div className="relative h-96 w-96 m-auto mb-36">
           <Image
             layout="fill"
             className="rounded-lg object-cover object-center "
@@ -39,7 +39,7 @@ export const GaleriaProductos = ({ imagenes = [] }) => {
           {imagenes.map((imagen, index) => (
             <div
               key={index}
-              className={`relative w-24 h-24 flex items-center justify-center sm:w-24 sm:h-24 mx-1 cursor-pointer
+              className={`relative w-24 h-24 mb-10 flex items-center justify-center sm:w-24 sm:h-24 mx-1 cursor-pointer
                 ${active === imagen.src ? 'border-2 border-black opacity-100' : 'opacity-50'}
                 hover:opacity-100 hover:border hover:border-black transition-all duration-300 ease-in-out
             

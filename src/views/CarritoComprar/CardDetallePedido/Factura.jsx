@@ -11,7 +11,7 @@ export const Factura = () => {
   // Verificar si hay productos en el carrito
   const tieneProductos = contarProductos() > 0;
   const totalCompra = tieneProductos ? calcularTotal() : 0;
-  const envio = tieneProductos && totalCompra > 179999 ? 0 : tieneProductos ? 9000 : 0;
+  const envio = tieneProductos && totalCompra > 179999 ? 0 : tieneProductos ? 16000 : 0;
   const totalConEnvio = totalCompra + envio;
 
   return (
@@ -36,7 +36,7 @@ export const Factura = () => {
       {envio === 0 && tieneProductos && (
         <div className="flex justify-between">
           <p className="text-gray-600">AHORRO TOTAL</p>
-          <p className="text-gray-800 font-semibold">$9.000,00</p>
+          <p className="text-gray-800 font-semibold">$16.000,00</p>
         </div>
       )}
     </div>

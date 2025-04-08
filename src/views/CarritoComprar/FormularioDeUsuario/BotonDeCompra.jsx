@@ -37,10 +37,9 @@ export const CarritoComprasIcono = ({ formData }) => {
 
   const generarMensajeWhatsApp = () => {
     const subtotal = calcularTotal();
-    const envio = subtotal > 179999 ? 0 : 15000; // Definir costo de envío
+    const envio = 16000; // Establecemos el costo de envío en 16,000
     const total = subtotal + envio;
-    const ahorro = envio === 0 ? 9000 : 0;
-  
+
     // Inicia el mensaje con la introducción y los datos del cliente
     let mensaje = `Gracias por su compra! 🎉\n\nResumen de su orden:\n========================\n`;
     mensaje += `Nombre: ${formData.nombres} ${formData.apellidos}\n`;
@@ -49,27 +48,26 @@ export const CarritoComprasIcono = ({ formData }) => {
     mensaje += `Teléfono: ${formData.numeroDeCelular}\n`;
     mensaje += `Dirección: ${formData.direccion}, ${formData.barrio}, ${formData.ciudad}, ${formData.departamento}\n`;
     mensaje += `========================\n`;
-  
+
     // Añade los detalles de cada producto
     carrito.forEach((producto) => {
       mensaje += `- ${producto.cantidad} *${producto.nombre}* - Talla: ${producto.talla}, Color: ${obtenerNombreColor(producto.color)}, Precio: _$${producto.precio.toLocaleString("es-CO")}_\n`;
     });
-  
+
     // Añade los totales de la orden
     mensaje += `========================\nSubtotal: *$${subtotal.toLocaleString("es-CO")}*\n`;
-    mensaje += `Envío: ${envio === 0 ? "GRATIS" : `$${envio.toLocaleString("es-CO")}`}\n`;
+    mensaje += `Envío: *$${envio.toLocaleString("es-CO")}*\n`; // Ahora siempre muestra el costo de envío
     mensaje += `Total: *$${total.toLocaleString("es-CO")}*\n`;
-    if (ahorro) mensaje += `Ahorro total: *$${ahorro.toLocaleString("es-CO")}*\n`;
     mensaje += `========================\n`;
-  
+
     return mensaje;
   };
-  
+
   const handleEnviarWhatsApp = () => {
     const mensaje = generarMensajeWhatsApp();
-    const numeroWhatsApp = "3332368545";
+    const numeroWhatsApp = "3332807534"; // Número de WhatsApp destino
     const url = `https://wa.me/57${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank");
+    window.open(url, "_blank"); // Abre la URL en una nueva pestaña
   };
 
   const handleSubmit = async () => {
@@ -84,8 +82,7 @@ export const CarritoComprasIcono = ({ formData }) => {
         tipoDeDocumento: formData.tipoDeDocumento.anchorKey, // Solo enviar el valor de currentKey
       };
       delete preparedData.aceptaTerminos; // Eliminar el campo aceptaTerminos
- 
-      
+
       const { status, dataResponse } = await postData(
         `${RUTA_API}/api/usuarios`,
         preparedData
@@ -93,7 +90,7 @@ export const CarritoComprasIcono = ({ formData }) => {
 
       if (status === 201) {
         toast.success("Gracias por su compra, espere unos segundos.");
-        
+
         confetti({
           particleCount: 200,
           spread: 100,
@@ -102,10 +99,10 @@ export const CarritoComprasIcono = ({ formData }) => {
             x: buttonRef.current.getBoundingClientRect().left / window.innerWidth + 0.072,
           },
         });
+
         setTimeout(() => {
-         
           handleEnviarWhatsApp(); // Llama a la función para enviar el mensaje de WhatsApp
-          vaciarCarrito()
+          vaciarCarrito(); // Vacía el carrito después de la compra
         }, 3000);
       } else {
         console.error("Error al crear el usuario:", dataResponse);

@@ -10,7 +10,7 @@ export const IconWhastApp = () => {
 
   // Función para manejar el envío de mensaje a WhatsApp
   const handleSendMessage = () => {
-    const whatsappUrl = `https://wa.me/573017996301?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/573332807534?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
     setMessage("")
   };

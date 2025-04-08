@@ -17,6 +17,13 @@ export const NumeroDocumento = (NumeroDocumento) => {
     }
   };
 
+  export const validarNombre2 = (nombre) => {
+    if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ]+( [A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$/.test(nombre)  || nombre.length > 100) {
+      return false; // Retorna vacío si cumple con la condición
+    } else {
+      return "El nombre debe contener solo letras máximo 100 caracteres";;
+    }
+  };
 
   export const validartelefono = (telefono ) => {
     if (  /^\d{10}$/.test(telefono.toString())) {

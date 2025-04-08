@@ -52,7 +52,7 @@ export const Catalogo = () => {
     <>
       <Layout />
       <Carrusel imagenes={catalogo.imagenesparavideo} />
-      <div className="flex flex-col items-center justify-center "> <p className="text-center text-2xl sm:text-3xl sm:h-20 sm:my-36 my-10 md:text-5xl lg:text-6xl font-semibold mx-4"> Inspirada en el pasado, creada para el presente ⚡ </p> </div>
+      <div className="flex flex-col items-center justify-center "> <p className="text-center text-2xl sm:text-3xl sm:h-20 sm:my-36 my-10 md:text-5xl lg:text-6xl font-semibold mx-4 uppercase"> Inspirada en el pasado, creada para el presente ⚡ </p> </div>
       <div className='sm:m-auto sm:px-10 sm:mr-16 '>
         <GaleriaImagenes imagenes={catalogo.imagenesparagaleria} />
       </div>
@@ -61,7 +61,7 @@ export const Catalogo = () => {
         imagen={catalogo.imagendescripcion}
         titulo={catalogo.titulodescripcion}
       />
-      <p className='sm:ml-16 ml-4   text-3xl text-gray-400 font-semibold'>
+      <p className='sm:ml-16 ml-4   text-3xl text-black font-semibold'>
         productos que pueden interesarte:
       </p>
       <Producto Ids={catalogo.productosdestacados} />

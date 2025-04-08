@@ -47,17 +47,17 @@ export const TerminosyCondiciones = () => {
                 3.2. Procedimiento para Cambios
                 Para gestionar un cambio, debes comunicarte con nuestro equipo de atención al cliente y proporcionar detalles del producto que deseas cambiar. Se realizarán cambios únicamente por productos de igual valor o superior, en cuyo caso deberás cubrir la diferencia.
             </p>
-            
+
 
 
 
             <p className="m-4 md:m-8 lg:m-10 text-xl md:text-2xl font-bold">
-              4. Promociones y Descuentos
+                4. Promociones y Descuentos
             </p>
             <p className="m-4 md:m-8 lg:m-10 text-lg md:text-xl font-semibold">
-            4.1. Aplicación de Descuentos
-            Los descuentos y promociones no son acumulables y están sujetos a los términos específicos de cada oferta. Mitology se reserva el derecho de modificar o cancelar promociones en cualquier momento sin previo aviso.
-              </p>
+                4.1. Aplicación de Descuentos
+                Los descuentos y promociones no son acumulables y están sujetos a los términos específicos de cada oferta. Mitology se reserva el derecho de modificar o cancelar promociones en cualquier momento sin previo aviso.
+            </p>
             <p className="m-4 md:m-8 lg:m-10 text-lg md:text-xl font-semibold">
 
                 3.2. Procedimiento para Cambios
@@ -66,45 +66,45 @@ export const TerminosyCondiciones = () => {
 
 
 
-            
-            <p className="m-4 md:m-8 lg:m-10 text-xl md:text-2xl font-bold">
-            5. Propiedad Intelectual
-            </p>
-            <p className="m-4 md:m-8 lg:m-10 text-lg md:text-xl font-semibold">
-          
-            5.1. Uso de Contenidos
-            Todo el contenido de nuestro sitio web, incluyendo imágenes, descripciones, logos y marcas, son propiedad exclusiva de Mitology y están protegidos por leyes de derechos de autor. Queda prohibido su uso sin nuestro consentimiento.
-           </p>
-           
 
-             
-           <p className="m-4 md:m-8 lg:m-10 text-xl md:text-2xl font-bold">
-           6. Limitación de Responsabilidad
+            <p className="m-4 md:m-8 lg:m-10 text-xl md:text-2xl font-bold">
+                5. Propiedad Intelectual
             </p>
-            <p className="m-4 md:m-8 lg:m-10 text-lg md:text-xl font-semibold">
-            6.1. Garantía de Producto
-Mitology no se hace responsable por daños o perjuicios derivados del uso incorrecto de los productos adquiridos. Las recomendaciones de uso estarán incluidas en el empaque del producto.
-              </p>
             <p className="m-4 md:m-8 lg:m-10 text-lg md:text-xl font-semibold">
 
-            6.2. Limitación de Daños
-Nuestra responsabilidad en relación con cualquier reclamación no excederá el valor del producto adquirido, y no nos hacemos responsables de pérdidas indirectas o consecuentes.
+                5.1. Uso de Contenidos
+                Todo el contenido de nuestro sitio web, incluyendo imágenes, descripciones, logos y marcas, son propiedad exclusiva de Mitology y están protegidos por leyes de derechos de autor. Queda prohibido su uso sin nuestro consentimiento.
             </p>
-        
-        
-        
-        
-        
-        
+
+
+
             <p className="m-4 md:m-8 lg:m-10 text-xl md:text-2xl font-bold">
-            7. Modificaciones a los Términos
+                6. Limitación de Responsabilidad
             </p>
             <p className="m-4 md:m-8 lg:m-10 text-lg md:text-xl font-semibold">
-          
-            Mitology se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Los cambios serán efectivos en el momento en que se publiquen en nuestro sitio web. Te recomendamos revisar esta sección periódicamente.
-              </p>
-          
-        
+                6.1. Garantía de Producto
+                Mitology no se hace responsable por daños o perjuicios derivados del uso incorrecto de los productos adquiridos. Las recomendaciones de uso estarán incluidas en el empaque del producto.
+            </p>
+            <p className="m-4 md:m-8 lg:m-10 text-lg md:text-xl font-semibold">
+
+                6.2. Limitación de Daños
+                Nuestra responsabilidad en relación con cualquier reclamación no excederá el valor del producto adquirido, y no nos hacemos responsables de pérdidas indirectas o consecuentes.
+            </p>
+
+
+
+
+
+
+            <p className="m-4 md:m-8 lg:m-10 text-xl md:text-2xl font-bold">
+                7. Modificaciones a los Términos
+            </p>
+            <p className="m-4 md:m-8 lg:m-10 text-lg md:text-xl font-semibold">
+
+                Mitology se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Los cambios serán efectivos en el momento en que se publiquen en nuestro sitio web. Te recomendamos revisar esta sección periódicamente.
+            </p>
+
+
         </div>
 
 

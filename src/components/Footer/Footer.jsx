@@ -24,9 +24,9 @@ export const Footer = () => {
                 <Image className="m-auto" src={facebook} width={30} />
               </Link>
 
-              <button className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" type="button">
+              <Link to={"https://www.tiktok.com/@mitology_col?_t=8rQAqlULKMy&_r=1"} className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" type="button">
                 <Image className="m-auto" src={tiktik} width={30} />
-              </button>
+              </Link>
             </div>
 
           </div>
@@ -46,7 +46,7 @@ export const Footer = () => {
 
                   <Link
                     className="relative text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm after:content-[''] after:absolute after:bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-black hover:after:w-full after:transition-all after:duration-300"
-                    to="/productos/buscar/camisas"
+                    to="/productos/todos"
                   >
                     Productos
                   </Link>
